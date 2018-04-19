@@ -4,7 +4,7 @@ C影 - Language-agnostic package and project manager
 
 ## Usage
 
-First, install it with `npm i ckage -g` to install it globally.
+First, install it with `$ npm i ckage -g` to install it globally.
 
 ```
   Usage: ckage [options]
@@ -21,4 +21,12 @@ First, install it with `npm i ckage -g` to install it globally.
 
 ckage, like npm, allows you to have a manifest file (`ckage.json`) which makes it easier to specify dependencies in a project. When installing a package, specify the `--save` flag to add the package into your manifest file.
 
-By default, ckage uses the `ckage/` folder for packages. 
+By default, ckage uses the `ckage/` folder for packages.
+
+The global config file for ckage exists at `~/.ckage`. It's a JSON file in the following format:
+
+```json
+{
+        "token": "YOUR_LOGIN_TOKEN_FOR_CKAGE"
+}
+```

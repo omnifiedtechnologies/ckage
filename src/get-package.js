@@ -28,6 +28,7 @@ module.exports.getPackage = (pkg, flags) => {
         responseType: 'stream'
     }).then((res) => {
         // download the file response into the dir where the script was run from
+        // if the dir flag is unset then use the default: 'ckages'.
         res.data.pipe(fs.createWriteStream(path.resolve(process.cwd(),
                                                         (flags.dir || 'ckages'), pkg)));
     });

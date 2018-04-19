@@ -1,5 +1,6 @@
 const commander = require('commander');
 const fs = require('fs');
+const config = require('~/.ckage');
 
 const getPkg = require('./src/get-package');
 
