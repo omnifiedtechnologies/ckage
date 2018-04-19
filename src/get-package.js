@@ -27,7 +27,7 @@ module.exports.getPackage = (pkg, flags) => {
     // perform get request on the package
     axios({
         method: 'get',
-        url: baseUrl + '/pkg/?pkg=' + pkg + '&token=' + config.token,
+        url: baseUrl + '/pkg/?pkg=' + pkg,
         responseType: 'stream'
     }).then((res) => {
         // download the file response into the dir where the script was run from

@@ -1,7 +1,9 @@
 const commander = require('commander');
 const fs = require('fs');
 
+// built-in modules
 const getPkg = require('./src/get-package');
+const pubPkg = require('./src/publish');
 
 // parse command line options
 commander
@@ -10,7 +12,13 @@ commander
             'Install a package; specify no package to install from ckage.json')
     .option('-s, --save', 'Save into the ckage file along with install')
     .option('-d, --dir <directory>', 'Specify a custom package out directory')
+    .option('p, publish', 'Publish to the repository')
     .parse(process.argv);
+
+// if publish is set
+if(commander.publish){
+    pubPkg.publishPackage('pkg');
+}
 
 // if the option exists
 if(commander.install){
