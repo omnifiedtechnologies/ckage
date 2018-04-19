@@ -2,6 +2,9 @@ const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
+// load the ~/ckage.json file.
+const config = require(path.resolve(require('os').homedir(), '.ckage.json'));
+
 const DEBUG = true;
 
 if(DEBUG){
@@ -24,7 +27,7 @@ module.exports.getPackage = (pkg, flags) => {
     // perform get request on the package
     axios({
         method: 'get',
-        url: baseUrl + '/pkg/' + pkg,
+        url: baseUrl + '/pkg/?pkg=' + pkg + '&token=' + config.token,
         responseType: 'stream'
     }).then((res) => {
         // download the file response into the dir where the script was run from
@@ -33,3 +36,4 @@ module.exports.getPackage = (pkg, flags) => {
                                                         (flags.dir || 'ckages'), pkg)));
     });
 };
+

@@ -23,7 +23,7 @@ ckage, like npm, allows you to have a manifest file (`ckage.json`) which makes i
 
 By default, ckage uses the `ckage/` folder for packages.
 
-The global config file for ckage exists at `~/.ckage`. It's a JSON file in the following format:
+The global config file for ckage exists at `~/.ckage.json`.
 
 ```json
 {
