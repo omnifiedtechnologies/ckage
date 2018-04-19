@@ -21,7 +21,6 @@ app.post('/upload', (req, res) => {
     }
 
     // user sent a (valid) token and a file.
-    console.log(req.files);
     if(req.body.token && db.tokens.includes(req.body.token) && req.files.pkg){
         // get the file
         let pkg = req.files.pkg;

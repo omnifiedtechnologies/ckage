@@ -7,14 +7,15 @@ C影 - Language-agnostic package and project manager
 First, install it with `$ npm i ckage -g` to install it globally.
 
 ```
-  Usage: ckage [options]
+  Usage: index [options]
 
   Options:
 
     -V, --version          output the version number
-    i, install [pkg]       Install a package; specify no package to install from ckage.json
     -s, --save             Save into the ckage file along with install
     -d, --dir <directory>  Specify a custom package out directory
+    p, publish             Publish to the repository
+    i, install [pkg]       Install a package; specify no package to install from ckage.json
     -h, --help             output usage information
 ```
 
@@ -30,3 +31,15 @@ The global config file for ckage exists at `~/.ckage.json`.
         "token": "YOUR_LOGIN_TOKEN_FOR_CKAGE"
 }
 ```
+
+## Why?
+
+It may not be clear why we would build yet another package manager. There are so many and yet we built another one, why?
+
+The purpose of Ckage is to provide an incredibly lightweight solution to *internal* package management. At a company, you don't want to have to deal with dependency conflicts.
+
+Furthermore, let's say I want to create an internal node module to use across multiple projects but I don't want to make this code published. What can I do? well with Ckage that's simple. You simply point the package manager at your own custom instance. Ckage is distributed, you can host an instance if you so please.
+
+Let's again assume that an NPM package becomes compromised. You shouldn't be concerned about updating the packages you have because each package should be *individually* checked for security or dependency conflicts before being checked in.
+
+The purpose of Ckage is to get red of all of those uncontrollable variables you have when you use a public package manager.

@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const commander = require('commander');
 const fs = require('fs');
 
@@ -8,11 +10,13 @@ const pubPkg = require('./src/publish');
 // parse command line options
 commander
     .version('1.0.0')
-    .option('i, install [pkg]',
-            'Install a package; specify no package to install from ckage.json')
+
+
     .option('-s, --save', 'Save into the ckage file along with install')
     .option('-d, --dir <directory>', 'Specify a custom package out directory')
     .option('p, publish', 'Publish to the repository')
+    .option('i, install [pkg]',
+            'Install a package; specify no package to install from ckage.json')     
     .parse(process.argv);
 
 // if publish is set
