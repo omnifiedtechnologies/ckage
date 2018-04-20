@@ -22,6 +22,18 @@ First, install it with `$ npm i ckage -g` to install it globally.
 
 ckage, like npm, allows you to have a manifest file (`ckage.json`) which makes it easier to specify dependencies in a project. When installing a package, specify the `--save` flag to add the package into your manifest file.
 
+Manifest files appear as follows:
+```json
+{
+        "packageTitle": "your-package-title-no-caps-or-spaces",
+        "sourceDirs": [
+                      "src",
+                      "src2"
+        ],
+        "creator": "Name <contact@yoursite.tld>"
+}
+```
+
 By default, ckage uses the `ckage/` folder for packages.
 
 The global config file for ckage exists at `~/.ckage.json`.
