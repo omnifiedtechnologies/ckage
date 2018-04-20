@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 const fileUpload = require('express-fileupload');
 const sanitize = require('sanitize-filename');
+const fileType = require('file-type');
 const bodyParser = require('body-parser');
 const app = express();
 
@@ -24,11 +25,16 @@ app.post('/upload', (req, res) => {
     if(req.body.token && db.tokens.includes(req.body.token) && req.files.pkg){
         // get the file
         let pkg = req.files.pkg;
-        // sanitize the name to stop cheeky attacks
-        pkg.mv('./pkg/' + sanitize(pkg.name), (err) => {
-            if(err) return res.status(500).send('Unable to upload file');
-            res.send('Successfully uploaded package');
-        });
+        // only operate if the file is a valid zip.
+        if(fileType(pkg.data).mime === 'application/zip'){ 
+            // sanitize the name to stop cheeky attacks
+            pkg.mv('./pkg/' + sanitize(pkg.name), (err) => {
+                if(err) res.status(500).send('Unable to upload file');
+                res.send('Successfully uploaded package');
+            });
+        } else {
+            res.status(400).send('Package sent was in incorrect format');
+        }
     } else { // token is unauthorized.
         res.status(401).send('Incorrect token.');
     }

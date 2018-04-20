@@ -20,7 +20,7 @@ module.exports.publishPackage = (pkg) => {
             else console.log(body);
         });
         let form = req.form();
-        form.append('pkg', fs.createReadStream(path.resolve('pkg')));
+        form.append('pkg', fs.createReadStream(path.resolve('pkg.zip')));
         form.append('token', config.token);
     });
 };
@@ -31,6 +31,8 @@ const isDirectoryPackage = (callback) => {
     fs.readdir(process.cwd(), (err, items) => {
         if(items.includes('ckage.json')){ // if there's a manifest file in cwd.
             callback('pkg');
+        } else {
+            console.log("ERROR: This is not a Ckage project directory...");
         }
     });
 };
