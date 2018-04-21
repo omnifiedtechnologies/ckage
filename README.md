@@ -45,9 +45,12 @@ The global config file for ckage exists at `~/.ckage.json`.
 
 ```json
 {
-        "token": "YOUR_LOGIN_TOKEN_FOR_CKAGE"
+        "token": "YOUR_LOGIN_TOKEN_FOR_CKAGE",
+        "url": "http://base_url_here.tld"
 }
 ```
+
+`url` is the base URL for the instance of ckage you are using. This is just the URL you have it running on. This can be a local server or one setup over anything that supports HTTP. The URL in a testing environment can just be set to "http://localhost:8080".
 
 ## Why?
 

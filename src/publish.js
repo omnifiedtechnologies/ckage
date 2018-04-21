@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const request = require('request');
 const archiver = require('archiver');
+const log = require('./log');
 // load ~/.ckage.json config file.
 const config = require(path.resolve(require('os').homedir(), '.ckage.json'));
 // load local manifest file
@@ -20,8 +21,8 @@ module.exports.publishPackage = (pkg) => {
     isDirectoryPackage(() => { // only called if cwd is a valid package
         // create an HTTP post request
         let req = request.post(baseUrl, (err, res, body) => {
-            if(err) console.log(err);
-            else console.log(body);
+            if(err) log.error(err);
+            else log(body);
         });
         let form = req.form();
         
@@ -39,7 +40,7 @@ const isDirectoryPackage = (callback) => {
         if(items.includes('ckage.json')){ // if there's a manifest file in cwd.
             callback('pkg');
         } else {
-            console.log("ERROR: This is not a Ckage project directory...");
+            log.error('This is not a Ckage project directory...');
         }
     });
 };
@@ -54,12 +55,12 @@ module.exports.makeArchive = (callback) => {
 
     // listen for archive creation event
     output.on('close', () => {
-        console.log(`Archive created (${archive.pointer() / 1024}KB)`);
+        log(`Archive created (${archive.pointer() / 1024}KB)`);
         callback();
     });
 
     archive.on('error', (err) => {
-        console.log(err);
+        log.error(err);
     });
 
     archive.pipe(output);
@@ -70,7 +71,7 @@ module.exports.makeArchive = (callback) => {
     manifest.sourceDirs.forEach((dir) => {
         let dirIsDone = false; // current dir is finished being zipped?
         fs.readdir(process.cwd() + '/' + dir, (err, items) => {
-            if(err) console.log(err);
+            if(err) log.error(err);
             //maintain state throughout async and check when done.
             let numItems = items.length;
             let itemsZipped = 0;
@@ -80,11 +81,9 @@ module.exports.makeArchive = (callback) => {
                 // TODO: allow regex.
                 if(!manifest.fileIgnores.includes(item)){
                     // append the file
-                    console.log(item);
                     archive.append(fs.createReadStream(
                         process.cwd() + '/' + dir + '/' + item), {name: item});
                     itemsZipped++;
-                    console.log(itemsZipped, numItems);
                     if(itemsZipped == numItems){
                         dirIsDone = true;
                     }

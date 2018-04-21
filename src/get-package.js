@@ -1,17 +1,12 @@
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-
+const log = require('./log');
+const chalk = require('chalk');
 // load the ~/ckage.json file.
 const config = require(path.resolve(require('os').homedir(), '.ckage.json'));
 
-const DEBUG = true;
 
-if(DEBUG){
-    baseUrl = "http://localhost:8080";
-}else{
-    baseUrl = "http://ckage.pw";
-}
 module.exports.parseList = (flags) => {
     // load the ckage.json package list
     let list = require(path.resolve('ckage.json'));
@@ -23,17 +18,20 @@ module.exports.parseList = (flags) => {
 
 /*request the package*/
 module.exports.getPackage = (pkg, flags) => {
-    console.log(`Downloading ${pkg}...`);
+    log(chalk.blue(`Downloading ${pkg}...`));
     // perform get request on the package
+    let getUrl = config.url + '/pkg' + '?pkg=' + pkg;
     axios({
         method: 'get',
-        url: baseUrl + '/pkg/?pkg=' + pkg,
+        url: getUrl,
         responseType: 'stream'
     }).then((res) => {
         // download the file response into the dir where the script was run from
         // if the dir flag is unset then use the default: 'ckages'.
         res.data.pipe(fs.createWriteStream(path.resolve(process.cwd(),
                                                         (flags.dir || 'ckages'), pkg)));
+    }).catch((err) => {
+        log.error(err);
     });
 };
 
