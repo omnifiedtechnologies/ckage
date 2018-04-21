@@ -30,6 +30,11 @@ Manifest files appear as follows:
         "src",
         "anything-can-go-here"
     ],
+    "packages":[
+        "pkg1",
+        "pkg2",
+        "whatever-package-you-need"
+    ],
     "fileIgnores": [
         "node_modules",
         "any-other-file-to-ignore"
