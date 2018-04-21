@@ -1,0 +1,12 @@
+{
+    "packageTitle": "ckage",
+    "sourceDirs": [
+        "src",
+        "server"
+    ],
+    "fileIgnores": [
+        "node_modules",
+        "pkg"
+    ],
+    "creator": "Name <ben@july7.pw>"
+}

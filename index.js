@@ -2,6 +2,7 @@
 
 const commander = require('commander');
 const fs = require('fs');
+const manifest = require('./ckage.json');
 
 // built-in modules
 const getPkg = require('./src/get-package');
@@ -16,7 +17,7 @@ commander
     .option('-d, --dir <directory>', 'Specify a custom package out directory')
     .option('p, publish', 'Publish to the repository')
     .option('i, install [pkg]',
-            'Install a package; specify no package to install from ckage.json')     
+            'Install a package; specify no package to install from ckage.json')
     .parse(process.argv);
 
 // if publish is set
@@ -41,6 +42,7 @@ if(commander.install){
     })
 }
 
+
 // handle the install parameter
 const installPkg = (flags) => {
     if(flags.install != true){ 
@@ -49,3 +51,10 @@ const installPkg = (flags) => {
         getPkg.parseList(flags); // download all of the packages.
     }
 }
+
+// compare with the list of tests
+// temporarily is just a testing operation for checking functions.
+// TODO: read tests from manifest
+const ckageTest = (t) => {
+    console.log("TODO: implement testing.");
+};

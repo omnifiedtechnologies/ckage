@@ -7,7 +7,7 @@ C影 - Language-agnostic package and project manager
 First, install it with `$ npm i ckage -g` to install it globally.
 
 ```
-  Usage: index [options]
+  Usage: ckage [options]
 
   Options:
 
@@ -25,13 +25,18 @@ ckage, like npm, allows you to have a manifest file (`ckage.json`) which makes i
 Manifest files appear as follows:
 ```json
 {
-        "packageTitle": "your-package-title-no-caps-or-spaces",
-        "sourceDirs": [
-                      "src",
-                      "src2"
-        ],
-        "creator": "Name <contact@yoursite.tld>"
+    "packageTitle": "your-title-no-spaces",
+    "sourceDirs": [
+        "src",
+        "anything-can-go-here"
+    ],
+    "fileIgnores": [
+        "node_modules",
+        "any-other-file-to-ignore"
+    ],
+    "creator": "Name <ben@july7.pw>"
 }
+
 ```
 
 By default, ckage uses the `ckage/` folder for packages.
