@@ -57,6 +57,14 @@ The global config file for ckage exists at `~/.ckage.json`.
 
 `url` is the base URL for the instance of ckage you are using. This is just the URL you have it running on. This can be a local server or one setup over anything that supports HTTP. The URL in a testing environment can just be set to "http://localhost:8080".
 
+### Setting up a Ckage server
+
+One of the core features of Ckage is a simple server setup. To setup the server, simply clone the repository, run the the setup script in `server/` and start the server with `$ node server.js`.
+
+To run it on an HTTP port, set the environment variable `CKAGEPORT` to whatever port you want to run it on. The setup script sets this port to `8080`. You can set it to any arbitrary port with `export CKAGEPORT=x` where x is your port. NOTE: In order to run on any port below 1024 (ex: 80, 443), you must run as super user.
+
+All packages published to your ckage instance will be in the `pkg/` directory in the directory of `server.js`.
+
 ## Why?
 
 It may not be clear why we would build yet another package manager. There are so many and yet we built another one, why?

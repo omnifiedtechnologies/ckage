@@ -7,6 +7,7 @@ const fileType = require('file-type');
 const bodyParser = require('body-parser');
 const app = express();
 
+const PORT = process.env.CKAGEPORT;
 
 // in-memory database for the testing phase.
 const db = { "tokens": [] };
@@ -28,6 +29,7 @@ app.post('/upload', (req, res) => {
         // only operate if the file is a valid zip.
         if(fileType(pkg.data).mime === 'application/zip'){ 
             // sanitize the name to stop cheeky attacks
+            // all package as stored in the `pkg/` directory.
             pkg.mv('./pkg/' + sanitize(pkg.name), (err) => {
                 if(err) res.status(500).send('Unable to upload file');
                 res.send('Successfully uploaded package');
