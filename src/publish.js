@@ -16,8 +16,15 @@ if(DEBUG){
     baseUrl = "http://ckage.pw/upload";
 }
 
+module.exports = () => {
+    isDirectoryPackage(() => {
+        makeArchive(() => {
+            publishPackage();
+        });
+    });
+};
 
-module.exports.publishPackage = (pkg) => {
+const publishPackage = () => {
     isDirectoryPackage(() => { // only called if cwd is a valid package
         // create an HTTP post request
         let req = request.post(baseUrl, (err, res, body) => {
@@ -45,7 +52,7 @@ const isDirectoryPackage = (callback) => {
     });
 };
 
-module.exports.makeArchive = (callback) => {
+const makeArchive = (callback) => {
     // setup archiver lip and create zip file.
     let output = fs.createWriteStream(manifest.packageTitle + '.zip');
     let archive = archiver('zip');

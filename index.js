@@ -6,7 +6,7 @@ const manifest = require('./ckage.json');
 
 // built-in modules
 const getPkg = require('./src/get-package');
-const pubPkg = require('./src/publish');
+const publish = require('./src/publish');
 const log = require('./src/log');
 
 // parse command line options
@@ -21,7 +21,7 @@ commander
 
 // if publish is set
 if(commander.publish){
-    pubPkg.publishPackage('pkg');
+    publish();
 }
 
 // if the option exists
@@ -49,7 +49,7 @@ const installPkg = (flags) => {
     } else {
         getPkg.parseList(flags); // download all of the packages.
     }
-}
+};
 
 // compare with the list of tests
 // temporarily is just a testing operation for checking functions.
@@ -57,3 +57,4 @@ const installPkg = (flags) => {
 const ckageTest = (t) => {
     log("TODO: implement testing.");
 };
+        

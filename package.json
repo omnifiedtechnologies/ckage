@@ -1,6 +1,6 @@
 {
     "name": "ckage",
-    "version": "1.0.0",
+    "version": "1.0.4",
     "description": "Language-agnostic package and project manager",
     "main": "index.js",
     "scripts": {
